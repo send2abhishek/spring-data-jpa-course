@@ -18,13 +18,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        List<Book> books = List.of(new Book("Spring Framework", "1234", "John"), new Book("Spring in Action", "1234", "James"));
-        bookRepository.saveAll(books);
-
-
-        // retrieve books
-
-        bookRepository.findAll().forEach(book -> System.out.println(book.getTitle()));
+        if(bookRepository.count()==0){
+            List<Book> books = List.of(new Book("Spring Framework", "1234", "John"), new Book("Spring in Action", "1234", "James"));
+            bookRepository.saveAll(books);
+        }
     }
 }

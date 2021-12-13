@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.annotation.Commit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -16,6 +17,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // this will load minimal context for testing for spring data repository, this will scans the repositories,entities.
 // This will not load the data insilizer which we are doing to load initial data
 
+//bring the data initializer
+@ComponentScan(basePackages = {" com.learnspring.jpa.springjpacourse.bootStrap"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DataJpaTest
 public class SpringBootJpaTestSlice {
@@ -30,7 +33,7 @@ public class SpringBootJpaTestSlice {
     void testJpaTestSplice() {
         long count = bookRepository.count();
 
-        assertThat(count).isEqualTo(0);
+        assertThat(count).isEqualTo(2);
 
         bookRepository.save(new Book("Demo Book", "12345", "self"));
 
@@ -43,7 +46,7 @@ public class SpringBootJpaTestSlice {
     @Test
     void testJpaTestSpliceTransaction() {
         long countAfter = bookRepository.count();
-        assertThat(countAfter).isEqualTo(1);
+        assertThat(countAfter).isEqualTo(3);
 
     }
 }

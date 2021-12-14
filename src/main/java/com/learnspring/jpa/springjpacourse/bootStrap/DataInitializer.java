@@ -19,7 +19,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (bookRepository.count() == 0) {
-            List<Book> books = List.of(new Book("Spring Framework", "1234", "John", null), new Book("Spring in Action", "1234", "James", null));
+            List<Book> books = List.of(new Book("Spring Framework", "1234", "John"), new Book("Spring in Action", "1234", "James"));
             bookRepository.saveAll(books);
         }
     }
